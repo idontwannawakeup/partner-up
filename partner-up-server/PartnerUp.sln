@@ -9,11 +9,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{55EF0D55-1DA3-4C20-B9EB-CE796F843E7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Shared", "src\Libraries\PartnerUp.Shared\PartnerUp.Shared.csproj", "{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.EventBus.Messages", "src\Libraries\PartnerUp.EventBus.Messages\PartnerUp.EventBus.Messages.csproj", "{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{55EF0D55-1DA3-4C20-B9EB-CE796F843E7D} = {201C91B2-1085-4BFD-90B9-297A7F07034C}
+		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8} = {55EF0D55-1DA3-4C20-B9EB-CE796F843E7D}
+		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764} = {55EF0D55-1DA3-4C20-B9EB-CE796F843E7D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
