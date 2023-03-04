@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  pnup-identity-server:
+    container_name: pnup-identity-server
+    hostname: pnup.identity.server
+    build:
+      context: .
+      dockerfile: ./src/Microservices/Identity/PartnerUp.IdentityServer/Dockerfile
+    ports:
+      - "5119:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+
+      - ConnectionStrings__PeopleConnection=Server=host.docker.internal,14330;Database=PartnerUpPeople;User=sa;Password=YourStrong@Passw0rd;
+      - ConnectionStrings__IdentityServerConfigurationConnection=Server=host.docker.internal,14330;Database=PartnerUpConfiguration;User=sa;Password=YourStrong@Passw0rd;
+      - ConnectionStrings__IdentityServerOperationalConnection=Server=host.docker.internal,14330;Database=PartnerUpOperational;User=sa;Password=YourStrong@Passw0rd;
+      - EventBusSettings__HostAddress=amqp://guest:guest@host.docker.internal:5672
+      - ElasticUrl=http://host.docker.internal:9200
+      - DevClientSettings__Secret=SuperSecretPassword
+    depends_on:
+      - pnup-dependency-mssql
+      - pnup-dependency-rabbitmq
+ 
