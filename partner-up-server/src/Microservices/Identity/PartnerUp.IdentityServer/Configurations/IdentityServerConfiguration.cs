@@ -52,7 +52,7 @@ public static class IdentityServerConfiguration
     {
         new Client
         {
-            ClientId = "teamwork-system-dev-client",
+            ClientId = "partner-up-dev-client",
             ClientName = "PartnerUp Dev Client",
             AllowedGrantTypes = GrantTypes.ClientCredentials,
             AllowAccessTokensViaBrowser = true,

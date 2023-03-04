@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddCustomLogging(
     builder.Configuration,
     builder.Environment,
-    "teamwork-system-identity-server");
+    "partner-up-identity-server");
 
 builder.Services.AddPresentation(builder.Configuration);
 
