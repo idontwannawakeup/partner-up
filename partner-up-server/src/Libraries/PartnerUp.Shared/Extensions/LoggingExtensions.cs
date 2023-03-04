@@ -25,7 +25,7 @@ public static class LoggingExtensions
                                           IndexFormat = $"{projectName}-logs-{DateTime.UtcNow:yyyy-MM}",
                                           AutoRegisterTemplate = true,
                                           NumberOfShards = 2,
-                                          NumberOfReplicas = 1
+                                          NumberOfReplicas = 1,
                                       })
                                   .Enrich.WithProperty("Environment", webHostEnvironment.EnvironmentName)
                                   .ReadFrom.Configuration(configuration)

@@ -7,6 +7,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D2F3E9BB-CE9C-4B5F-80E8-ED86B771F209}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
+		docker-compose-dependencies.yaml = docker-compose-dependencies.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{55EF0D55-1DA3-4C20-B9EB-CE796F843E7D}"
@@ -14,6 +15,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Shared", "src\Libraries\PartnerUp.Shared\PartnerUp.Shared.csproj", "{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.EventBus.Messages", "src\Libraries\PartnerUp.EventBus.Messages\PartnerUp.EventBus.Messages.csproj", "{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{61432141-C13F-44CC-873A-A31B0F443F8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{4828B468-090C-4842-8A0F-6D6B2888725F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.IdentityServer", "src\Microservices\Identity\PartnerUp.IdentityServer\PartnerUp.IdentityServer.csproj", "{5ADE7E76-26F5-4D5B-AB61-330E62356440}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{3949D091-A24D-45B1-A2D2-4451F0DDA706}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Identity.Persistence.Configuration", "src\Microservices\Identity\Persistence\PartnerUp.Identity.Persistence.Configuration\PartnerUp.Identity.Persistence.Configuration.csproj", "{2AC8BFA5-CFA7-42D0-9D24-81A5A31B1239}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Identity.Persistence.Operational", "src\Microservices\Identity\Persistence\PartnerUp.Identity.Persistence.Operational\PartnerUp.Identity.Persistence.Operational.csproj", "{07DC266B-3F11-4EEA-A729-32D8B2C76431}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Identity.Persistence.People", "src\Microservices\Identity\Persistence\PartnerUp.Identity.Persistence.People\PartnerUp.Identity.Persistence.People.csproj", "{131F0D4F-70C4-4DC4-95A1-5B26EF47DA50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +39,13 @@ Global
 		{55EF0D55-1DA3-4C20-B9EB-CE796F843E7D} = {201C91B2-1085-4BFD-90B9-297A7F07034C}
 		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8} = {55EF0D55-1DA3-4C20-B9EB-CE796F843E7D}
 		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764} = {55EF0D55-1DA3-4C20-B9EB-CE796F843E7D}
+		{61432141-C13F-44CC-873A-A31B0F443F8B} = {201C91B2-1085-4BFD-90B9-297A7F07034C}
+		{4828B468-090C-4842-8A0F-6D6B2888725F} = {61432141-C13F-44CC-873A-A31B0F443F8B}
+		{5ADE7E76-26F5-4D5B-AB61-330E62356440} = {4828B468-090C-4842-8A0F-6D6B2888725F}
+		{3949D091-A24D-45B1-A2D2-4451F0DDA706} = {4828B468-090C-4842-8A0F-6D6B2888725F}
+		{2AC8BFA5-CFA7-42D0-9D24-81A5A31B1239} = {3949D091-A24D-45B1-A2D2-4451F0DDA706}
+		{07DC266B-3F11-4EEA-A729-32D8B2C76431} = {3949D091-A24D-45B1-A2D2-4451F0DDA706}
+		{131F0D4F-70C4-4DC4-95A1-5B26EF47DA50} = {3949D091-A24D-45B1-A2D2-4451F0DDA706}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -34,5 +56,21 @@ Global
 		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BB60D0C-6DA6-4CFE-BFF6-8BAD9D24E764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ADE7E76-26F5-4D5B-AB61-330E62356440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ADE7E76-26F5-4D5B-AB61-330E62356440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ADE7E76-26F5-4D5B-AB61-330E62356440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ADE7E76-26F5-4D5B-AB61-330E62356440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC8BFA5-CFA7-42D0-9D24-81A5A31B1239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC8BFA5-CFA7-42D0-9D24-81A5A31B1239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC8BFA5-CFA7-42D0-9D24-81A5A31B1239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC8BFA5-CFA7-42D0-9D24-81A5A31B1239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07DC266B-3F11-4EEA-A729-32D8B2C76431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07DC266B-3F11-4EEA-A729-32D8B2C76431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07DC266B-3F11-4EEA-A729-32D8B2C76431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07DC266B-3F11-4EEA-A729-32D8B2C76431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{131F0D4F-70C4-4DC4-95A1-5B26EF47DA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131F0D4F-70C4-4DC4-95A1-5B26EF47DA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131F0D4F-70C4-4DC4-95A1-5B26EF47DA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131F0D4F-70C4-4DC4-95A1-5B26EF47DA50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

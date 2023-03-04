@@ -33,7 +33,7 @@ public class PagedList<T> : List<T>
         PageSize,
         TotalEntitiesCount,
         HasPrevious,
-        HasNext
+        HasNext,
     };
 
     public PagedList<TOut> Map<TOut>(Func<T, TOut> selectExpression)

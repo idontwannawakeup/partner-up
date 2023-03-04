@@ -1,0 +1,59 @@
+version: "3.9"
+services:
+  pnup-dependency-mssql:
+    container_name: pnup-dependency-mssql
+    hostname: pnup.dependency.mssql
+    image: mcr.microsoft.com/mssql/server:2022-CU1-ubuntu-20.04
+    volumes:
+      - pnup-dependency-mssql-data:/var/opt/mssql
+    ports:
+      - "14330:1433"
+    environment:
+      - SA_PASSWORD=YourStrong@Passw0rd
+      - ACCEPT_EULA=Y
+
+  pnup-dependency-rabbitmq:
+    container_name: pnup-dependency-rabbitmq
+    hostname: pnup.dependency.rabbitmq
+    image: rabbitmq:3.10.5-management
+    volumes:
+      - pnup-dependency-rabbitmq-data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  pnup-dependency-redis:
+    container_name: pnup-dependency-redis
+    hostname: pnup.dependency.redis
+    image: redis:7.0.4
+    volumes:
+      - "pnup-dependency-redis-data:/data"
+    ports:
+      - "6379:6379"
+
+  pnup-dependency-elasticsearch:
+    container_name: pnup-dependency-elasticsearch
+    hostname: pnup.dependency.elasticsearch
+    image: elasticsearch:7.16.1
+    volumes:
+      - pnup-dependency-elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+
+  pnup-dependency-kibana:
+    container_name: pnup-dependency-kibana
+    hostname: pnup.dependency.kibana
+    image: kibana:7.16.1
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=["http://pnup.dependency.elasticsearch:9200"]
+
+volumes:
+  pnup-dependency-mssql-data:
+  pnup-dependency-rabbitmq-data:
+  pnup-dependency-redis-data:
+  pnup-dependency-elasticsearch-data:
