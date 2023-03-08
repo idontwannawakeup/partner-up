@@ -7,6 +7,7 @@ module.exports = {
     ],
     plugins: [require('daisyui')],
     theme: {},
+    darkMode: 'class',
     daisyui: {
         themes: [
             'lofi',
