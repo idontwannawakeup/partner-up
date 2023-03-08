@@ -3,7 +3,8 @@ import React from 'react';
 export default function Home() {
     return (
         <main>
-            Hey
+            <button className="btn">Button</button>
+            <button className="btn btn-primary">Button</button>
         </main>
     );
 }
