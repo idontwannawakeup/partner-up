@@ -25,8 +25,6 @@ export default function Home() {
                         <div className="navbar-end"></div>
                     </div>
                 </div>
-                <div className="w-full flex sticky top-[100vh] h-14 border-t border-t-neutral-900 dark:border-t-neutral-800">
-                </div>
             </section>
         </main>
     );
