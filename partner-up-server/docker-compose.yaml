@@ -20,4 +20,3 @@ services:
     depends_on:
       - pnup-dependency-mssql
       - pnup-dependency-rabbitmq
- 
