@@ -16,7 +16,7 @@ builder.Services.AddApplication();
 builder.Services.AddPresentation(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddTwsSwagger();
+builder.Services.AddPartnerUpSwagger();
 
 var app = builder.Build();
 

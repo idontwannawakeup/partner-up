@@ -4,7 +4,7 @@ namespace PartnerUp.WorkManagement.API.Extensions.Dependencies;
 
 public static class SwaggerDependenciesExtensions
 {
-    public static IServiceCollection AddTwsSwagger(this IServiceCollection services)
+    public static IServiceCollection AddPartnerUpSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(c =>
         {
