@@ -62,6 +62,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Social.BusinessLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Social.API", "src\Microservices\Social\PartnerUp.Social.API\PartnerUp.Social.API.csproj", "{35D34755-590E-4517-A976-722C27630B31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Content.Domain", "src\Microservices\Content\Core\PartnerUp.Content.Domain\PartnerUp.Content.Domain.csproj", "{580932A8-E3BE-45E3-94CE-4D710C3096A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Content.Application", "src\Microservices\Content\Core\PartnerUp.Content.Application\PartnerUp.Content.Application.csproj", "{624F021E-1043-46F7-939C-47F4384856AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Content.Persistence", "src\Microservices\Content\Infrastructure\PartnerUp.Content.Persistence\PartnerUp.Content.Persistence.csproj", "{FE2DE084-237F-4B3D-8507-57B4EB3628FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Content.API", "src\Microservices\Content\Presentation\PartnerUp.Content.API\PartnerUp.Content.API.csproj", "{EE2F3B9B-9DA9-4550-8E23-9B3F4B348653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +102,10 @@ Global
 		{7B8C272D-8CDE-49BA-8D29-0E9FB90F8B8B} = {EDDB88F9-1F44-4E80-A184-E597FA707754}
 		{850EA687-F327-4481-934A-555A8DFAC06D} = {EDDB88F9-1F44-4E80-A184-E597FA707754}
 		{35D34755-590E-4517-A976-722C27630B31} = {EDDB88F9-1F44-4E80-A184-E597FA707754}
+		{580932A8-E3BE-45E3-94CE-4D710C3096A3} = {1A9B21E8-2504-4FAD-AF00-611252D9C093}
+		{624F021E-1043-46F7-939C-47F4384856AD} = {1A9B21E8-2504-4FAD-AF00-611252D9C093}
+		{FE2DE084-237F-4B3D-8507-57B4EB3628FD} = {CD7E90AE-7272-412E-B662-34658C9BF467}
+		{EE2F3B9B-9DA9-4550-8E23-9B3F4B348653} = {601F0CE6-749C-4DCE-B3EA-5C8AA68017A5}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -148,5 +160,21 @@ Global
 		{35D34755-590E-4517-A976-722C27630B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35D34755-590E-4517-A976-722C27630B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35D34755-590E-4517-A976-722C27630B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{580932A8-E3BE-45E3-94CE-4D710C3096A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580932A8-E3BE-45E3-94CE-4D710C3096A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580932A8-E3BE-45E3-94CE-4D710C3096A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580932A8-E3BE-45E3-94CE-4D710C3096A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624F021E-1043-46F7-939C-47F4384856AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624F021E-1043-46F7-939C-47F4384856AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624F021E-1043-46F7-939C-47F4384856AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624F021E-1043-46F7-939C-47F4384856AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2DE084-237F-4B3D-8507-57B4EB3628FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2DE084-237F-4B3D-8507-57B4EB3628FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2DE084-237F-4B3D-8507-57B4EB3628FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2DE084-237F-4B3D-8507-57B4EB3628FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE2F3B9B-9DA9-4550-8E23-9B3F4B348653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2F3B9B-9DA9-4550-8E23-9B3F4B348653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2F3B9B-9DA9-4550-8E23-9B3F4B348653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2F3B9B-9DA9-4550-8E23-9B3F4B348653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
