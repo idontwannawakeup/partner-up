@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "PartnerUp.Identity.API": {
+    "PartnerUp.Identity.People.API": {
       "commandName": "Project",
       "launchUrl": "swagger",
       "environmentVariables": {
