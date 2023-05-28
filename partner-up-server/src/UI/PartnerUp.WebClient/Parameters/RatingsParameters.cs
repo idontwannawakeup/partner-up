@@ -1,0 +1,6 @@
+﻿namespace PartnerUp.WebClient.Parameters;
+
+public class RatingsParameters : QueryStringParameters
+{
+    public Guid? RatedUserId { get; set; }
+}
