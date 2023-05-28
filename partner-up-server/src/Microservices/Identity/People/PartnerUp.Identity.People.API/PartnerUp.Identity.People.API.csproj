@@ -26,4 +26,10 @@
         <ProjectReference Include="..\PartnerUp.Identity.People.BusinessLogic\PartnerUp.Identity.People.BusinessLogic.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\..\..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>
