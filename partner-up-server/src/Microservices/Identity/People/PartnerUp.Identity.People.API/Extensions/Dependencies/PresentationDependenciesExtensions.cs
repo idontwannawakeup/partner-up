@@ -17,8 +17,8 @@ public static class PresentationDependenciesExtensions
         });
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddTwsAuthentication(configuration);
-        services.AddTwsSwagger();
+        services.AddPartnerUpAuthentication(configuration);
+        services.AddPartnerUpSwagger();
         return services;
     }
 }

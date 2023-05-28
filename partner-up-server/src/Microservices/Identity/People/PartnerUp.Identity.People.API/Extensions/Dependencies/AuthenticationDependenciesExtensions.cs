@@ -4,7 +4,7 @@ namespace PartnerUp.Identity.People.API.Extensions.Dependencies;
 
 public static class AuthenticationDependenciesExtensions
 {
-    public static IServiceCollection AddTwsAuthentication(
+    public static IServiceCollection AddPartnerUpAuthentication(
         this IServiceCollection services,
         IConfiguration configuration)
     {

@@ -76,6 +76,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Identity.People.B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Identity.People.API", "src\Microservices\Identity\People\PartnerUp.Identity.People.API\PartnerUp.Identity.People.API.csproj", "{BFC33814-F766-4070-962E-1FBAF80C25BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartnerUp.Gateway", "src\PartnerUp.Gateway\PartnerUp.Gateway.csproj", "{01EDB7E5-FF03-43C7-96AD-01ACF3AB12B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,7 @@ Global
 		{4D664BE8-A16B-4B8F-AD72-839E3FD6E752} = {4828B468-090C-4842-8A0F-6D6B2888725F}
 		{2736EAAD-77A4-4701-B29C-83E7F9FD059D} = {4D664BE8-A16B-4B8F-AD72-839E3FD6E752}
 		{BFC33814-F766-4070-962E-1FBAF80C25BA} = {4D664BE8-A16B-4B8F-AD72-839E3FD6E752}
+		{01EDB7E5-FF03-43C7-96AD-01ACF3AB12B1} = {201C91B2-1085-4BFD-90B9-297A7F07034C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F2D52FC2-7DDB-4778-BB2B-BD3B8016B9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -193,5 +196,9 @@ Global
 		{BFC33814-F766-4070-962E-1FBAF80C25BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFC33814-F766-4070-962E-1FBAF80C25BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFC33814-F766-4070-962E-1FBAF80C25BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01EDB7E5-FF03-43C7-96AD-01ACF3AB12B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EDB7E5-FF03-43C7-96AD-01ACF3AB12B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EDB7E5-FF03-43C7-96AD-01ACF3AB12B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EDB7E5-FF03-43C7-96AD-01ACF3AB12B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

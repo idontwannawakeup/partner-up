@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddCustomLogging(
     builder.Configuration,
     builder.Environment,
-    "teamwork-system-identity");
+    "partner-up-identity");
 
 builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddBusinessLogic();
