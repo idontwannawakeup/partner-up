@@ -38,7 +38,7 @@ public class TeamsService : ITeamsService
     public async Task SetAvatarForTeamAsync(Guid id, IBrowserFile file)
     {
         var buffer = new byte[file.Size];
-        _ = await file.OpenReadStream().ReadAsync(buffer);
+        _ = await file.OpenReadStream(maxAllowedSize: 1024L * 1024L * 1024L * 2L).ReadAsync(buffer);
         var imageContent = new ByteArrayContent(buffer);
         imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse(file.ContentType);
 
