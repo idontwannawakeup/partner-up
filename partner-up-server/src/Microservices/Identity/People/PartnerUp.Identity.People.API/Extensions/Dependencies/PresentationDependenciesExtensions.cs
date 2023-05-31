@@ -17,7 +17,8 @@ public static class PresentationDependenciesExtensions
         });
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddPartnerUpAuthentication(configuration);
+        // TODO: return IdentityServerAuthentication
+        services.AddAuthenticationWithJwtBearer(configuration);
         services.AddPartnerUpSwagger();
         return services;
     }

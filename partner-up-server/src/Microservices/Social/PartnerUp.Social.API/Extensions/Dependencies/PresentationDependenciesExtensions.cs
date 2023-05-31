@@ -9,7 +9,7 @@ public static class PresentationDependenciesExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddPartnerUpAuthentication(configuration);
+        services.AddAuthenticationWithJwtBearer(configuration);
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddMassTransit(massTransitConfiguration =>
