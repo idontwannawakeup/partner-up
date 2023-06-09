@@ -11,7 +11,7 @@ public static class PresentationDependenciesExtensions
     {
         services.AddGrpc();
         services.AddValidation();
-        services.AddAuthenticationWithJwtBearer(configuration);
+        services.AddPartnerUpAuthentication(configuration);
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.AddMassTransit(massTransitConfiguration =>

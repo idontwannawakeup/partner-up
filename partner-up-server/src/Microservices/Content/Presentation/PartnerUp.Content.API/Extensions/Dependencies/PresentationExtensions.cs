@@ -15,7 +15,7 @@ public static class PresentationExtensions
                               .Get<ServicesSettings>());
 
         services.AddValidation();
-        services.AddAuthenticationWithJwtBearer(configuration);
+        services.AddPartnerUpAuthentication(configuration);
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddRedis(configuration);
 
