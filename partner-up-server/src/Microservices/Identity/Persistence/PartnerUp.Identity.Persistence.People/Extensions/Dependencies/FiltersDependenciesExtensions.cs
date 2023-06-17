@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PartnerUp.Identity.Persistence.People.Common.Factories.FilterFactories;
 using PartnerUp.Identity.Persistence.People.Data.Entities;
 using PartnerUp.Shared.Filters;
 using PartnerUp.Shared.Interfaces.Filters;
@@ -9,8 +10,8 @@ public static class FiltersDependenciesExtensions
 {
     public static IServiceCollection AddFilterFactories(this IServiceCollection services)
     {
-        services.AddTransient<IFilterCriteriaFactory, FilterCriteriaFactory>();
-        services.AddTransient<IFilterFactory<User>, FilterFactory<User>>();
+        // services.AddTransient<IFilterCriteriaFactory, FilterCriteriaFactory>();
+        services.AddTransient<IFilterFactory<User>, UserFilterFactory>();
         return services;
     }
 }

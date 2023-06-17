@@ -9,7 +9,7 @@ public static class QueryableExtensions
         IFilter<T> filter) =>
         filter.ApplyFilters(items);
 
-    public static IQueryable<T> FilterBy<T>(
+    public static IQueryable<T> FilterByCriterion<T>(
         this IQueryable<T> items,
         IFilterCriterion<T> criterion) =>
         criterion.Condition ? items.Where(criterion.Expression) : items;

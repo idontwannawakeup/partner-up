@@ -11,7 +11,6 @@ public static class DataAccessExtensions
     {
         services.AddDatabase(configuration);
         services.AddData();
-        services.AddFilterFactories();
         services.AddSeeding();
         return services;
     }

@@ -20,8 +20,4 @@
         <ProjectReference Include="..\..\Core\PartnerUp.WorkManagement.Domain\PartnerUp.WorkManagement.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Common" />
-    </ItemGroup>
-
 </Project>

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PartnerUp.Identity.Persistence.People.Common.Filters.Users;
 using PartnerUp.Identity.Persistence.People.Common.Parameters;
 using PartnerUp.Identity.Persistence.People.Data.Entities;
 using PartnerUp.Identity.Persistence.People.Interfaces.Data.Repositories;
 using PartnerUp.Shared.Exceptions;
 using PartnerUp.Shared.Extensions;
+using PartnerUp.Shared.Interfaces.Filters;
 using PartnerUp.Shared.Pagination;
 
 namespace PartnerUp.Identity.Persistence.People.Data.Repositories;
@@ -13,10 +13,12 @@ namespace PartnerUp.Identity.Persistence.People.Data.Repositories;
 public class UsersRepository : IUsersRepository
 {
     private readonly UserManager<User> _userManager;
+    private readonly IFilterFactory<User> _filter;
 
-    public UsersRepository(UserManager<User> userManager)
+    public UsersRepository(UserManager<User> userManager, IFilterFactory<User> filter)
     {
         _userManager = userManager;
+        _filter = filter;
     }
 
     public async Task<IEnumerable<User>> GetAsync()
@@ -26,7 +28,8 @@ public class UsersRepository : IUsersRepository
 
     public async Task<PagedList<User>> GetAsync(UsersParameters parameters)
     {
-        var source = _userManager.Users.FilterBy(new LastNameCriterion(parameters));
+        // var source = _userManager.Users.FilterBy(new LastNameCriterion(parameters));
+        var source = _userManager.Users.FilterWith(_filter.Get(parameters));
         return await PagedList<User>.ToPagedListAsync(
             source,
             parameters.PageNumber,
