@@ -36,9 +36,11 @@ public class FriendsRepository : IFriendsRepository
             queryBuilder.Append(" and fup.LastName like '%' + @LastName + '%'");
         }
 
+        var debugQuery = queryBuilder.ToString();
+
         var enumerable = await _connection.QueryAsync<UserProfile>(
             queryBuilder.ToString(),
-            new { UserId = userId });
+            new { UserId = userId, LastName = parameters.LastName });
 
         var friends = enumerable as UserProfile[] ?? enumerable.ToArray();
         int pageNumber = parameters.PageNumber, pageSize = parameters.PageSize;
