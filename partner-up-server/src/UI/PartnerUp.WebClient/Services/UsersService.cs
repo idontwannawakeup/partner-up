@@ -37,9 +37,9 @@ public class UsersService : IUsersService
 
     public async Task SetAvatarForUserAsync(Guid id, IBrowserFile file)
     {
-        var buffer = new byte[file.Size];
-        _ = await file.OpenReadStream(maxAllowedSize: 1024L * 1024L * 1024L * 2L).ReadAsync(buffer);
-        var imageContent = new ByteArrayContent(buffer);
+        const long maxAllowedSize = 1024L * 1024L * 1024L * 2L;
+
+        var imageContent = new StreamContent(file.OpenReadStream(maxAllowedSize));
         imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse(file.ContentType);
 
         var userIdContent = new StringContent(id.ToString());

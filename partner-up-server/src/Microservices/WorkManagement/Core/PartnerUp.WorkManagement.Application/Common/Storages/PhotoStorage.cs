@@ -15,7 +15,7 @@ public class PhotoStorage : IPhotoStorage
         var photosFolderPath = TryCreatePhotosFolder();
         var fileExtension = Path.GetExtension(photo.FileName);
         var fileName = $"{DateTime.Now:yyyyMMddHHmmssffff}{fileExtension}";
-        await using var fileStream = File.Create(Path.Combine(photosFolderPath, fileName));
+        await using var fileStream = File.OpenWrite(Path.Combine(photosFolderPath, fileName));
 
         await photo.CopyToAsync(fileStream);
         await fileStream.FlushAsync();
