@@ -55,6 +55,11 @@ public class TeamsService : ITeamsService
 
     public async Task DeleteAsync(Guid id) => await _httpClient.DeleteAsync($"{id}");
 
+    public async Task<IEnumerable<UserViewModel>> GetMembersAsync(Guid id)
+    {
+        return await _httpClient.GetAsync<List<UserViewModel>>($"{id}/members");
+    }
+
     public async Task AddMemberAsync(TeamMemberViewModel viewModel) =>
         await _httpClient.PostAsync("members", viewModel);
 

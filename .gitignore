@@ -7,6 +7,10 @@
 .idea
 .vscode
 tempkey.jwk
+**/wwwroot/Public/Photos
+!/wwwroot/Public/Photos
+!/partner-up-server/src/Microservices/Identity/People/PartnerUp.Identity.People.API/wwwroot/Public/Photos/.gitkeep
+!/partner-up-server/src/Microservices/WorkManagement/Presentation/PartnerUp.WorkManagement.API/wwwroot/Public/Photos/.gitkeep
 
 # User-specific files
 *.rsuser

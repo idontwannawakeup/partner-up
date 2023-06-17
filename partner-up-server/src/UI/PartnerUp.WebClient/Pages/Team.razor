@@ -68,7 +68,7 @@
                 <MudText Typo="@Typo.subtitle1"
                          Style="@_colorGrey"
                          Class="pb-1">
-                    @Localizer["TotalCount"]: @_membersPagination.TotalEntitiesCount
+                    @Localizer["TotalCount"]: @_members.Count()
                 </MudText>
                 <MudDivider Class="my-2" />
                 @if (_members.Count() != 0)
@@ -188,7 +188,6 @@
     private string _searchTitle;
     private TeamViewModel _team;
     private IEnumerable<UserViewModel> _members;
-    private PaginationHeaderViewModel _membersPagination;
     private Guid _userId;
 
     private string EditLink => $"/team/{TeamId}/settings";
@@ -208,11 +207,7 @@
         _team = await TeamsService.GetByIdAsync(TeamId);
 
     private async Task InitializeMembersAsync() =>
-        (_members, _membersPagination) = await UsersService.GetWithPaginationHeaderAsync(new()
-        {
-            TeamId = TeamId,
-            PageSize = 30
-        });
+        _members = await TeamsService.GetMembersAsync(TeamId);
 
     private async Task DeleteMemberAsync(UserViewModel user)
     {

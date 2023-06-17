@@ -23,6 +23,8 @@ public interface ITeamsService
 
     Task DeleteAsync(Guid id);
 
+    Task<IEnumerable<UserViewModel>> GetMembersAsync(Guid id);
+
     Task AddMemberAsync(TeamMemberViewModel viewModel);
 
     Task DeleteMemberAsync(TeamMemberViewModel viewModel);
