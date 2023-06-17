@@ -1,6 +1,8 @@
 using System.Globalization;
 using Blazored.LocalStorage;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Localization;
 using MudBlazor.Services;
@@ -26,9 +28,42 @@ public class Startup
     {
         services.AddRazorPages();
         services.AddServerSideBlazor();
+
         services.AddMudServices();
         services.AddBlazoredLocalStorage();
-        services.AddAuthorizationCore();
+        services.AddHttpContextAccessor();
+
+        services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddOpenIdConnect(
+                OpenIdConnectDefaults.AuthenticationScheme,
+                options =>
+                {
+                    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.SignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                    options.Authority = Configuration["PartnerUpUiClientSettings:AuthorityUrl"];
+                    options.ClientId = Configuration["PartnerUpUiClientSettings:ClientId"];
+                    options.ClientSecret = Configuration["PartnerUpUiClientSettings:ClientSecret"];
+
+                    options.Scope.Add("identity-api.read");
+                    options.Scope.Add("identity-api.write");
+                    options.Scope.Add("work-management-api.read");
+                    options.Scope.Add("work-management-api.write");
+                    options.Scope.Add("social-api.read");
+                    options.Scope.Add("social-api.write");
+                    options.Scope.Add("content-api.read");
+
+                    options.ResponseType = "code";
+                    options.SaveTokens = true;
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                }
+            );
+
+        // services.AddAuthorizationCore();
 
         services.AddControllers();
 
@@ -41,9 +76,9 @@ public class Startup
 
         services.AddTransient<RequestErrorsHandler>();
 
-        services.AddScoped<AuthenticationStateProvider>(
-            provider => provider.GetRequiredService<ApiAuthenticationStateProvider>());
-
+        // services.AddScoped<AuthenticationStateProvider>(
+        //     provider => provider.GetRequiredService<ApiAuthenticationStateProvider>());
+        //
         services.AddScoped<ApiAuthenticationStateProvider>();
 
         string apiUrl = Configuration["ApiUrl"];

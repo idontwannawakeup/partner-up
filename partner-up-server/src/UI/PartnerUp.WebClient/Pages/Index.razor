@@ -14,31 +14,39 @@
         @Localizer["Welcome"]
     </MudText>
 
-    <MudButton Link="/signIn"
-               Class="my-2 py-2"
-               Color="@Color.Primary"
-               Variant="@Variant.Filled"
-               FullWidth="@true">
-        @SharedLocalizer["SignIn"]
-    </MudButton>
+    @if (_signInLink != null)
+    {
+        <MudButton Link="@_signInLink"
+                   Class="my-2 py-2"
+                   Color="@Color.Primary"
+                   Variant="@Variant.Filled"
+                   FullWidth="@true">
+            @SharedLocalizer["SignIn"]
+        </MudButton>
+    }
 
-    <MudButton Link="/signUp"
-               Class="my-2 py-2"
-               Color="@Color.Primary"
-               Variant="@Variant.Filled"
-               FullWidth="@true">
-        @SharedLocalizer["SignUp"]
-    </MudButton>
+    @* <MudButton Link="/signUp" *@
+    @*            Class="my-2 py-2" *@
+    @*            Color="@Color.Primary" *@
+    @*            Variant="@Variant.Filled" *@
+    @*            FullWidth="@true"> *@
+    @*     @SharedLocalizer["SignUp"] *@
+    @* </MudButton> *@
 
 </MudContainer>
 
 @code {
+
+    private string _signInLink;
 
     [CascadingParameter] private Task<AuthenticationState> StateAsync { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+
+        _signInLink = $"/signin?redirectUri={Uri.EscapeDataString(NavigationManager.Uri)}";
+
         var state = await StateAsync;
         var isAuthenticated = state.User.Identity is { IsAuthenticated: true };
         if (isAuthenticated)

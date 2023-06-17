@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using IdentityModel;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -72,7 +73,7 @@ public class TeamsController : ControllerBase
                 authorizationHeaderValue.Parameter);
 
             var userId = Guid.Parse(
-                token.Claims.First(claim => claim.Type == ClaimTypes.Authentication).Value);
+                token.Claims.First(claim => claim.Type == JwtClaimTypes.Subject).Value);
 
             await _publishEndpoint.Publish(new TeamAddedToRecentEvent
             {

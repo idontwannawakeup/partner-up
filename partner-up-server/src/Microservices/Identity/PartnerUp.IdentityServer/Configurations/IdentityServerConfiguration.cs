@@ -70,5 +70,30 @@ public static class IdentityServerConfiguration
                 "content-api.read",
             },
         },
+        new Client
+        {
+            ClientId = "partner-up-ui",
+            ClientSecrets = { new Secret(settings.Secret.Sha256()) },
+            AllowedGrantTypes = GrantTypes.Code,
+            RedirectUris = { "https://localhost:8001/signin-oidc" },
+            FrontChannelLogoutUri = "https://localhost:8001/signout-oidc",
+            PostLogoutRedirectUris = { "https://localhost:8001/signout-callback-oidc" },
+            AllowOfflineAccess = true,
+            AllowedScopes =
+            {
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                "identity-api.read",
+                "identity-api.write",
+                "work-management-api.read",
+                "work-management-api.write",
+                "social-api.read",
+                "social-api.write",
+                "content-api.read",
+            },
+            RequirePkce = true,
+            RequireConsent = true,
+            AllowPlainTextPkce = false,
+        },
     };
 }
