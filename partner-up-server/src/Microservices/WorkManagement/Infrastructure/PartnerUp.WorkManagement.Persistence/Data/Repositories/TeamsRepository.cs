@@ -16,6 +16,13 @@ public class TeamsRepository : GenericRepository<Team>, ITeamsRepository
     public TeamsRepository(WorkManagementDbContext databaseContext, IFilterFactory<Team> filter) :
         base(databaseContext) => _filter = filter;
 
+    public async Task<UserProfile> GetUserProfileToAddAsync(Guid id)
+    {
+        var user = await DatabaseContext.UserProfiles.FindAsync(id);
+
+        return user ?? throw new EntityNotFoundException("user not found");
+    }
+
     public override async Task<Team> GetCompleteEntityAsync(Guid id)
     {
         var team = await Table.Include(team => team.Leader)

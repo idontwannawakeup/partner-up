@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bogus" Version="34.0.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Identity\Persistence\PartnerUp.Identity.Persistence.People\PartnerUp.Identity.Persistence.People.csproj" />
+      <ProjectReference Include="..\..\Social\PartnerUp.Social.DataAccess\PartnerUp.Social.DataAccess.csproj" />
+      <ProjectReference Include="..\..\WorkManagement\Infrastructure\PartnerUp.WorkManagement.Persistence\PartnerUp.WorkManagement.Persistence.csproj" />
+    </ItemGroup>
+
+</Project>

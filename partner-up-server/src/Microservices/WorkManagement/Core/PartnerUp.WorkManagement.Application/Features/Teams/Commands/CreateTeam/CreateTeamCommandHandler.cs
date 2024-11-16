@@ -19,7 +19,7 @@ public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand>
     public async Task<Unit> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
     {
         var team = _mapper.Map<CreateTeamCommand, Team>(request);
-        var leader = new UserProfile { Id = request.LeaderId };
+        var leader = await _unitOfWork.TeamsRepository.GetUserProfileToAddAsync(request.LeaderId);
         team.Members = new List<UserProfile> { leader };
         await _unitOfWork.TeamsRepository.InsertAsync(team);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

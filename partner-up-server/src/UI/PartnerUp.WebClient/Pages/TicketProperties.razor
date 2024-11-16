@@ -3,6 +3,7 @@
 @inject ISnackbar Snackbar
 @inject ITicketsService TicketsService
 @inject IUsersService UsersService
+@inject ITeamsService TeamsService
 @inject RequestErrorsHandler RequestErrorsHandler
 
 @if (_ticket is not null)
@@ -131,12 +132,18 @@ else
 
     private async Task<IEnumerable<UserViewModel>> InitializeMembersAsync(string lastName)
     {
-        var members = await UsersService.GetAsync(new UsersParameters()
+        var members = await TeamsService.GetMembersAsync(_ticket.Project.Team.Id);
+        if (!string.IsNullOrWhiteSpace(lastName))
         {
-            TeamId = _ticket.Project.Team.Id,
-            LastName = lastName,
-            PageSize = 50
-        });
+            members = members.Where(m => m.LastName.Contains(lastName));
+        }
+
+        // members = await UsersService.GetAsync(new UsersParameters()
+        // {
+        //     TeamId = _ticket.Project.Team.Id,
+        //     LastName = lastName,
+        //     PageSize = 50
+        // });
 
         return members;
     }

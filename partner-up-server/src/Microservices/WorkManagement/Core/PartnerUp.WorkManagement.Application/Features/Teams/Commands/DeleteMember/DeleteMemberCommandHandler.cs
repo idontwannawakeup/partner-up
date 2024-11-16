@@ -15,7 +15,7 @@ public class DeleteMemberCommandHandler : IRequestHandler<DeleteMemberCommand>
 
     public async Task<Unit> Handle(DeleteMemberCommand request, CancellationToken cancellationToken)
     {
-        var member = new UserProfile { Id = request.UserId };
+        var member = await _unitOfWork.TeamsRepository.GetUserProfileToAddAsync(request.UserId);
         await _unitOfWork.TeamsRepository.DeleteMemberAsync(request.TeamId, member);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;

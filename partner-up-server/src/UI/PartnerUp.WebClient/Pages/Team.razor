@@ -43,6 +43,13 @@
                                 @Localizer["AddMember"]
                             </MudButton>
                             <MudButton Variant="@Variant.Outlined"
+                                       Color="@Color.Primary"
+                                       EndIcon="@Icons.Material.Filled.Add"
+                                       IconColor="@Color.Inherit"
+                                       OnClick="@OpenRecommendationsPage">
+                                Find New Members
+                            </MudButton>
+                            <MudButton Variant="@Variant.Outlined"
                                        Color="@Color.Info"
                                        EndIcon="@Icons.Material.Filled.Edit"
                                        IconColor="@Color.Inherit"
@@ -202,6 +209,9 @@
 
     private void OpenProjectPage(TableRowClickEventArgs<ProjectViewModel> args) =>
         NavigationManager.NavigateTo($"/project/{args.Item.Id}/overview");
+
+    private void OpenRecommendationsPage() =>
+        NavigationManager.NavigateTo($"/recommendations/{TeamId}");
 
     private async Task InitializeTeamAsync() =>
         _team = await TeamsService.GetByIdAsync(TeamId);

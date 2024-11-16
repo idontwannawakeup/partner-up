@@ -20,3 +20,105 @@ services:
     depends_on:
       - pnup-dependency-mssql
       - pnup-dependency-rabbitmq
+ 
+  pnup-identity-api:
+    container_name: pnup-identity-api
+    hostname: pnup.identity.api
+    build:
+      context: .
+      dockerfile: ./src/Microservices/Identity/People/PartnerUp.Identity.People.API/Dockerfile
+    ports:
+      - "5137:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal,14330;Database=TeamworkSystemPeople;User=sa;Password=YourStrong@Passw0rd;
+      - EventBusSettings__HostAddress=amqp://guest:guest@host.docker.internal:5672
+      - AuthenticationAuthorityUrl=http://host.docker.internal:5119
+      - ElasticUrl=http://host.docker.internal:9200
+    depends_on:
+      - pnup-dependency-mssql
+      - pnup-dependency-rabbitmq
+
+  pnup-work-management-api:
+    container_name: pnup-work-management-api
+    hostname: pnup.work.management.api
+    build:
+      context: .
+      dockerfile: ./src/Microservices/WorkManagement/Presentation/PartnerUp.WorkManagement.API/Dockerfile
+    ports:
+      - "5077:80"
+      - "6077:90"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Kestrel__Endpoints__Http__Url=http://*:80
+      - Kestrel__Endpoints__GrpcInsecure__Url=http://*:90
+      - Kestrel__Endpoints__GrpcInsecure__Protocols=Http2
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal,14330;Database=TeamworkSystemWorkManagement;User=sa;Password=YourStrong@Passw0rd;
+      - EventBusSettings__HostAddress=amqp://guest:guest@host.docker.internal:5672
+      - AuthenticationAuthorityUrl=http://host.docker.internal:5119
+      - ElasticUrl=http://host.docker.internal:9200
+    depends_on:
+      - pnup-dependency-mssql
+      - pnup-dependency-rabbitmq
+
+  pnup-social-api:
+    container_name: pnup-social-api
+    hostname: pnup.social.api
+    build:
+      context: .
+      dockerfile: ./src/Microservices/Social/PartnerUp.Social.API/Dockerfile
+    ports:
+      - "5158:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal,14330;Database=TeamworkSystemSocial;User=sa;Password=YourStrong@Passw0rd;
+      - EventBusSettings__HostAddress=amqp://guest:guest@host.docker.internal:5672
+      - AuthenticationAuthorityUrl=http://host.docker.internal:5119
+      - ElasticUrl=http://host.docker.internal:9200
+    depends_on:
+      - pnup-dependency-mssql
+      - pnup-dependency-rabbitmq
+      - pnup-dependency-elasticsearch
+      - pnup-dependency-kibana
+
+  pnup-content-api:
+    container_name: pnup-content-api
+    hostname: pnup.content.api
+    build:
+      context: .
+      dockerfile: ./src/Microservices/Content/Presentation/PartnerUp.Content.API/Dockerfile
+    ports:
+      - "5211:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+
+      - ConnectionStrings__DefaultConnection=Server=host.docker.internal,14330;Database=TeamworkSystemContent;User=sa;Password=YourStrong@Passw0rd;
+      - EventBusSettings__HostAddress=amqp://guest:guest@host.docker.internal:5672
+      - CacheSettings__RedisConnectionString=host.docker.internal:6379
+      - ServicesSettings__WorkManagementGrpcUrl=http://pnup.work.management.api:90
+      - AuthenticationAuthorityUrl=http://host.docker.internal:5119
+      - ElasticUrl=http://host.docker.internal:9200
+    depends_on:
+      - pnup-dependency-mssql
+      - pnup-dependency-rabbitmq
+      - pnup-dependency-redis
+      - pnup-work-management-api
+
+  pnup-gateway:
+    container_name: pnup-gateway
+    hostname: pnup.gateway
+    build:
+      context: .
+      dockerfile: ./src/PartnerUp.Gateway/Dockerfile
+    ports:
+      - "5161:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+
+      - ElasticUrl=http://host.docker.internal:9200
+    depends_on:
+      - pnup-identity-api
+      - pnup-work-management-api
+      - pnup-content-api

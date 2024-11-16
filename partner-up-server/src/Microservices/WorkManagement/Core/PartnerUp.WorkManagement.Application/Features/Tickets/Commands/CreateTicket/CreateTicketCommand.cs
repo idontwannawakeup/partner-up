@@ -5,7 +5,7 @@ namespace PartnerUp.WorkManagement.Application.Features.Tickets.Commands.CreateT
 public class CreateTicketCommand : IRequest
 {
     public Guid ProjectId { get; set; }
-    public Guid? ExecutorId { get; set; }
+    // public Guid? ExecutorId { get; set; }
     public string Title { get; set; } = default!;
     public string? Type { get; set; }
     public string Description { get; set; } = default!;

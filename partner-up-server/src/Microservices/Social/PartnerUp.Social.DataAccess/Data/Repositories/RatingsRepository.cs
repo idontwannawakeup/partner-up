@@ -47,6 +47,7 @@ public class RatingsRepository : IRatingsRepository
 
     public async Task InsertAsync(Rating rating)
     {
+        rating.Id = Guid.NewGuid();
         await _connection.ExecuteAsync(
             @"insert into Ratings
                 (Id, FromId, ToId, Social, Skills, Responsibility, Punctuality, Comment) values

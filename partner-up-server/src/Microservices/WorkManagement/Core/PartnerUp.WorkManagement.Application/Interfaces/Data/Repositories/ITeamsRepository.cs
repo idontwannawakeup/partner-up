@@ -13,4 +13,6 @@ public interface ITeamsRepository : IRepository<Team>
     Task<IEnumerable<UserProfile>> GetMembersAsync(Guid id);
     Task AddMemberAsync(Guid id, UserProfile member);
     Task DeleteMemberAsync(Guid id, UserProfile member);
+
+    Task<UserProfile> GetUserProfileToAddAsync(Guid id);
 }

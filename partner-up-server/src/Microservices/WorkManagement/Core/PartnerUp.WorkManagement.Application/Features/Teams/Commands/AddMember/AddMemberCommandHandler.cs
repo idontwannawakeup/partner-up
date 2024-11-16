@@ -15,7 +15,7 @@ public class AddMemberCommandHandler : IRequestHandler<AddMemberCommand>
 
     public async Task<Unit> Handle(AddMemberCommand request, CancellationToken cancellationToken)
     {
-        var member = new UserProfile { Id = request.UserId };
+        var member = await _unitOfWork.TeamsRepository.GetUserProfileToAddAsync(request.UserId);
         await _unitOfWork.TeamsRepository.AddMemberAsync(request.TeamId, member);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;

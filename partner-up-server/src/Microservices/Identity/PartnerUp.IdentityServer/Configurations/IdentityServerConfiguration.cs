@@ -46,6 +46,11 @@ public static class IdentityServerConfiguration
             Scopes = { "content-api.read" },
             UserClaims = { JwtClaimTypes.Name },
         },
+        new ApiResource("recommendations-api")
+        {
+            Scopes = { "recommendations-api.read", "recommendations-api.write" },
+            UserClaims = { JwtClaimTypes.Name },
+        },
     };
 
     public static IEnumerable<Client> Clients(DevClientSettings settings) => new List<Client>
@@ -68,6 +73,8 @@ public static class IdentityServerConfiguration
                 "social-api.read",
                 "social-api.write",
                 "content-api.read",
+                "recommendations-api.read", 
+                "recommendations-api.write",
             },
         },
         new Client
@@ -90,6 +97,8 @@ public static class IdentityServerConfiguration
                 "social-api.read",
                 "social-api.write",
                 "content-api.read",
+                "recommendations-api.read", 
+                "recommendations-api.write",
             },
             RequirePkce = true,
             RequireConsent = true,
