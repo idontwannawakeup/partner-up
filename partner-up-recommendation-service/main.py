@@ -49,7 +49,7 @@ def predict_candidate(model: JobDescription):
         le_category=le_category,
         resumes=resumes,
         job_descriptions=job_descriptions,
-        k=5
+        k=3
     )
 
     candidates = [{

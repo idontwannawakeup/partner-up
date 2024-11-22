@@ -1,4 +1,8 @@
-﻿using PartnerUp.Identity.Persistence.People.Data.Entities;
+﻿using System.Globalization;
+using System.Text.Json;
+using Bogus;
+using CsvHelper;
+using PartnerUp.Identity.Persistence.People.Data.Entities;
 
 namespace PartnerUp.Identity.Persistence.People.Data.Seeders;
 
@@ -189,5 +193,50 @@ public class UserSeeder
     public static void Seed(PeopleDbContext context)
     {
         context.Users.AddRange(Users);
+    }
+
+    public static void SeedUsersForRecommendations(PeopleDbContext context)
+    {
+        List<RecommendationUser> recommendationsUsers;
+        using (var reader = new StreamReader("recommendation-users.csv"))
+        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+        {
+            var records = csv.GetRecords<RecommendationUser>();
+            recommendationsUsers = records.ToList();
+        }
+
+        var users = recommendationsUsers.Select((item, index) =>
+        {
+            var faker = new Faker();
+            var firstName = faker.Person.FirstName;
+            var lastName = faker.Person.LastName;
+            var username = $"{faker.Internet.UserName(firstName, lastName)}_i{index}";
+            var email = faker.Internet.Email(firstName, lastName);
+            var normalizedUsername = username.ToUpperInvariant();
+            var normalizedEmail = email.ToUpperInvariant();
+
+            var trimmedSkills = item.Skills.Trim('"').Replace("\'", "\"");
+            var skills = JsonSerializer.Deserialize<string[]>(trimmedSkills) ?? Array.Empty<string>();
+
+            return new User
+            {
+                Id = Guid.NewGuid(),
+                UserName = username,
+                NormalizedUserName = normalizedUsername,
+                Email = email,
+                NormalizedEmail = normalizedEmail,
+                EmailConfirmed = true,
+                PasswordHash = "AQAAAAEAACcQAAAAEHIJxNS71yM2C19K8pJktzIg+gOfmz3ySn59bRPhmSrkabIMpXGGzKjZjhnEjFKqSA==",
+                ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                FirstName = firstName,
+                LastName = lastName,
+                Profession = item.JobTitle,
+                Specialization = string.Join(", ", skills),
+                RecommendationId = Guid.Parse(item.RecommendationId),
+            };
+        });
+
+        context.Users.AddRange(users);
     }
 }

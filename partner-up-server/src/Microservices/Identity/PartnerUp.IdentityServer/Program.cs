@@ -102,4 +102,12 @@ if (args.Contains("--pnup-forced-seeding"))
     }
 }
 
+if (args.Contains("--pnup-forced-recommendation-users-seeding"))
+{
+    await using var scope = app.Services.CreateAsyncScope();
+    var context = scope.ServiceProvider.GetRequiredService<PeopleDbContext>();
+    UserSeeder.SeedUsersForRecommendations(context);
+    await context.SaveChangesAsync();
+}
+
 await app.RunAsync();

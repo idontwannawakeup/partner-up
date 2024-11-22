@@ -9,4 +9,5 @@ public class User : IdentityUser<Guid>
     public string? Profession { get; set; }
     public string? Specialization { get; set; }
     public string? Avatar { get; set; }
+    public Guid? RecommendationId { get; set; }
 }

@@ -18,10 +18,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                .HasMaxLength(50)
                .IsRequired();
 
-        builder.Property(user => user.Profession)
-               .HasMaxLength(50);
+        builder.Property(user => user.Profession);
 
-        builder.Property(user => user.Specialization)
-               .HasMaxLength(50);
+        builder.Property(user => user.Specialization);
     }
 }
