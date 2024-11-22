@@ -3,7 +3,6 @@ using Blazored.LocalStorage;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Localization;
 using MudBlazor.Services;
 using PartnerUp.WebClient.Authentication;
@@ -121,6 +120,11 @@ public class Startup
             httpClient.BaseAddress = new($"{identityUrl}/Users/");
         });
 
+        services.AddHttpClient<IRecommendationsService, RecommendationService>(httpClient =>
+        {
+            httpClient.BaseAddress = new("http://127.0.0.1:8003/");
+        });
+        
         services.AddLocalization(options => options.ResourcesPath = "Localization");
         var supportedCultures = new List<CultureInfo> { new ("en-US"), new ("uk-UA") };
 
