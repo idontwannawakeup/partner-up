@@ -17,6 +17,8 @@ public interface IUsersService
 
     Task<UserViewModel> GetByIdAsync(Guid id);
 
+    Task<UserViewModel> GetByRecommendationIdAsync(Guid id);
+
     Task UpdateAsync(UserViewModel viewModel);
 
     Task SetAvatarForUserAsync(Guid id, IBrowserFile file);

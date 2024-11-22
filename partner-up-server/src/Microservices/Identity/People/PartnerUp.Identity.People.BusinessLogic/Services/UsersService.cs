@@ -40,6 +40,12 @@ public class UsersService : IUsersService
         return _mapper.Map<User, UserResponse>(user);
     }
 
+    public async Task<UserResponse> GetByRecommendationIdAsync(Guid id)
+    {
+        var user = await _unitOfWork.UsersRepository.GetCompleteEntityByRecommendationIdAsync(id);
+        return _mapper.Map<User, UserResponse>(user);
+    }
+
     public async Task<UserResponse> UpdateAsync(UserRequest request)
     {
         var user = await _unitOfWork.UsersRepository.GetByIdAsync(request.Id);

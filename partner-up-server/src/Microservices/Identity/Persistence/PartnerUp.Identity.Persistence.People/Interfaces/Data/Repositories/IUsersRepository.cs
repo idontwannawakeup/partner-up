@@ -11,6 +11,7 @@ public interface IUsersRepository
     Task<User> GetByIdAsync(Guid id);
     Task<User> FindByNameOrThrowAsync(string name);
     Task<User> GetCompleteEntityAsync(Guid id);
+    Task<User> GetCompleteEntityByRecommendationIdAsync(Guid id);
     Task UpdateAsync(User user);
     Task DeleteAsync(Guid id);
 }

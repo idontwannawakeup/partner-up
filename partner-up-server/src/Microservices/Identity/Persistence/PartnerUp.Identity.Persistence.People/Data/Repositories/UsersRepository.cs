@@ -54,6 +54,12 @@ public class UsersRepository : IUsersRepository
         var user = await _userManager.Users.SingleOrDefaultAsync(user => user.Id == id);
         return user ?? throw new EntityNotFoundException(GetUserNotFoundErrorMessage(id));
     }
+    
+    public async Task<User> GetCompleteEntityByRecommendationIdAsync(Guid id)
+    {
+        var user = await _userManager.Users.SingleOrDefaultAsync(user => user.RecommendationId == id);
+        return user ?? throw new EntityNotFoundException(GetUserNotFoundRecommendationErrorMessage(id));
+    }
 
     public async Task UpdateAsync(User user)
     {
@@ -68,4 +74,7 @@ public class UsersRepository : IUsersRepository
 
     private static string GetUserNotFoundErrorMessage(Guid id) =>
         $"{nameof(User)} with id {id} not found.";
+    
+    private static string GetUserNotFoundRecommendationErrorMessage(Guid id) =>
+        $"{nameof(User)} with recommendation id {id} not found.";
 }

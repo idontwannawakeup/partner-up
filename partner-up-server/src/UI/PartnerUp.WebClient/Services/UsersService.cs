@@ -32,6 +32,9 @@ public class UsersService : IUsersService
     public async Task<UserViewModel> GetByIdAsync(Guid id) =>
         await _httpClient.GetAsync<UserViewModel>($"{id}");
 
+    public async Task<UserViewModel> GetByRecommendationIdAsync(Guid id) =>
+        await _httpClient.GetAsync<UserViewModel>($"recommendation/{id}");
+
     public async Task UpdateAsync(UserViewModel viewModel) =>
         await _httpClient.PutAsync(string.Empty, viewModel);
 

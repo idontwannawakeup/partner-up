@@ -48,6 +48,14 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<UserResponse>> GetByIdAsync([FromRoute] Guid id) =>
         Ok(await _usersService.GetByIdAsync(id));
+    
+    [HttpGet("recommendation/{id:guid}")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<UserResponse>> GetByRecommendationIdAsync([FromRoute] Guid id) =>
+        Ok(await _usersService.GetByRecommendationIdAsync(id));
 
     [HttpPut]
     [Authorize]

@@ -123,13 +123,6 @@
                         {
                             <MudText Typo="@Typo.subtitle1" Color="@Color.Primary">@_user.Specialization</MudText>
                         }
-                        <MudElement HtmlTag="div" Class="user-profile__rating mt-4">
-                            <MudText Typo="@Typo.h6">
-                                Leave a rate about this recommendation
-                            </MudText>
-                            <MudRating />
-                            <MudDivider Class="mt-2 mb-4" />
-                        </MudElement>
                         <MudButton Link="@LinkToSelectedRecommendedUserProfile"
                                    Variant="@Variant.Outlined"
                                    Color="@Color.Info">
@@ -197,16 +190,6 @@
 
     private async Task<TableData<UserViewModel>> InitializeRecommendedTeammatesAsync(TableState state)
     {
-        // _authenticatedUserId = await ApiAuthenticationStateProvider.GetUserIdFromStateAsync(State);
-        // var (users, pagination) = await UsersService.GetWithPaginationHeaderAsync(new UsersParameters
-        // {
-        //     PageNumber = state.Page + 1,
-        //     PageSize = state.PageSize + 1,
-        // });
-        //
-        // users = users.Where(u => u.Profession == "Software Engineer" || u.Profession == "Developer").ToList();
-        // pagination.TotalEntitiesCount = users.Count();
-
         if (string.IsNullOrEmpty(ProfessionTextField) && !Skills.Any())
         {
             return new() { Items = Array.Empty<UserViewModel>(), TotalItems = 0 };
@@ -214,16 +197,14 @@
 
         var jobDescription = new JobDescriptionViewModel { Profession = ProfessionTextField, Skills = Skills.ToArray(), };
         var candidates = await RecommendationsService.RecommendCandidates(jobDescription);
-        var users = candidates.Select(candidate => new UserViewModel
-        {
-            Id = Guid.NewGuid(),
-            FullName = "Placeholder",
-            UserName = "Placeholder",
-            Profession = candidate.Profession,
-            Specialization = string.Join(", ", candidate.Skills),
-        });
 
-        // return new() { Items = users, TotalItems = pagination.TotalEntitiesCount };
+        var users = new List<UserViewModel>();
+        foreach (var candidate in candidates)
+        {
+            var userByRecommendationId = await UsersService.GetByRecommendationIdAsync(candidate.RecommendationId);
+            users.Add(userByRecommendationId);
+        }
+
         return new() { Items = users, TotalItems = users.Count() };
     }
 }
