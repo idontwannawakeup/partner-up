@@ -190,7 +190,7 @@
 
     private async Task<TableData<UserViewModel>> InitializeRecommendedTeammatesAsync(TableState state)
     {
-        if (string.IsNullOrEmpty(ProfessionTextField) && !Skills.Any())
+        if (string.IsNullOrEmpty(ProfessionTextField) || !Skills.Any())
         {
             return new() { Items = Array.Empty<UserViewModel>(), TotalItems = 0 };
         }
