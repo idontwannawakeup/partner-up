@@ -52,7 +52,7 @@
                 <MudText Typo="@Typo.h6" Style="@_colorGrey">@SharedLocalizer["Specialization"]</MudText>
                 @if (!string.IsNullOrWhiteSpace(_user.Specialization))
                 {
-                    <MudText Typo="@Typo.subtitle2">@_user.Specialization</MudText>
+                    <MudText Typo="@Typo.subtitle2">@_user.SpecializationTrimmed</MudText>
                 }
                 else
                 {

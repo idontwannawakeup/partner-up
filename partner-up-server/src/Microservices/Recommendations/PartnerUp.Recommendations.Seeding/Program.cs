@@ -7,6 +7,7 @@ using PartnerUp.Identity.Persistence.People.Common.Factories.FilterFactories;
 using PartnerUp.Identity.Persistence.People.Data.Entities;
 using PartnerUp.Identity.Persistence.People.Data.Repositories;
 using PartnerUp.Identity.Persistence.People.Interfaces.Data.Repositories;
+using PartnerUp.Recommendations.Seeding;
 using PartnerUp.Shared.Interfaces.Filters;
 using PartnerUp.Social.DataAccess;
 using PartnerUp.Social.DataAccess.Data.Repositories;
@@ -84,11 +85,25 @@ builder.Services.AddTransient<ITicketSeeder, TicketSeeder>();
     builder.Services.AddTransient<PartnerUp.Social.DataAccess.Interfaces.Data.Seeders.IUserProfileSeeder, PartnerUp.Social.DataAccess.Data.Seeders.UserProfileSeeder>();
 }
 
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+var seed = true;
+if (seed)
+{
+    await using var scope = app.Services.CreateAsyncScope();
+    var context = scope.ServiceProvider.GetRequiredService<PeopleDbContext>();
+    var workContext = scope.ServiceProvider.GetRequiredService<WorkManagementDbContext>();
+    var socialContext = scope.ServiceProvider.GetRequiredService<SocialDbContext>();
+    UserSeeder.SeedUsersForRecommendations(context, workContext, socialContext);
+    await context.SaveChangesAsync();
+    await workContext.SaveChangesAsync();
+    await socialContext.SaveChangesAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {

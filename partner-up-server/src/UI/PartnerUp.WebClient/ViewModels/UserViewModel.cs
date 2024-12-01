@@ -18,5 +18,8 @@ public class UserViewModel
 
     public string Specialization { get; set; }
 
+    public string SpecializationTrimmed =>
+        Specialization.Length <= 49 ? Specialization : Specialization.Substring(0, 49) + "...";
+
     public string Avatar { get; set; }
 }

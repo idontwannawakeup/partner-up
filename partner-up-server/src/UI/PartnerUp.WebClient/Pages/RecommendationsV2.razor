@@ -86,7 +86,7 @@
         <MudTd DataLabel="@SharedLocalizer["Specialization"]">
             @if (!string.IsNullOrWhiteSpace(context.Specialization))
             {
-                @context.Specialization
+                @context.SpecializationTrimmed
             }
             else
             {
@@ -121,7 +121,7 @@
                         }
                         @if (!string.IsNullOrWhiteSpace(_user.Specialization))
                         {
-                            <MudText Typo="@Typo.subtitle1" Color="@Color.Primary">@_user.Specialization</MudText>
+                            <MudText Typo="@Typo.subtitle1" Color="@Color.Primary">@_user.SpecializationTrimmed</MudText>
                         }
                         <MudButton Link="@LinkToSelectedRecommendedUserProfile"
                                    Variant="@Variant.Outlined"
