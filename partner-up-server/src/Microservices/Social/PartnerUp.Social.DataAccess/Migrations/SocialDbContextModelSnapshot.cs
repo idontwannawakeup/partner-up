@@ -17,12 +17,12 @@ namespace PartnerUp.Social.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PartnerUp.Social.DataAccess.Entities.Rating", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.Rating", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace PartnerUp.Social.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PartnerUp.Social.DataAccess.Entities.UserProfile", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,12 +92,10 @@ namespace PartnerUp.Social.DataAccess.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Profession")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Specialization")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -202,16 +200,16 @@ namespace PartnerUp.Social.DataAccess.Migrations
                     b.ToTable("Friends", (string)null);
                 });
 
-            modelBuilder.Entity("PartnerUp.Social.DataAccess.Entities.Rating", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.Rating", b =>
                 {
-                    b.HasOne("PartnerUp.Social.DataAccess.Entities.UserProfile", "From")
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", "From")
                         .WithMany("MyRatings")
                         .HasForeignKey("FromId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Ratings_FromId");
 
-                    b.HasOne("PartnerUp.Social.DataAccess.Entities.UserProfile", "To")
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", "To")
                         .WithMany("RatingsFromMe")
                         .HasForeignKey("ToId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -225,20 +223,20 @@ namespace PartnerUp.Social.DataAccess.Migrations
 
             modelBuilder.Entity("UserProfileUserProfile", b =>
                 {
-                    b.HasOne("PartnerUp.Social.DataAccess.Entities.UserProfile", null)
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", null)
                         .WithMany()
                         .HasForeignKey("FriendForUsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PartnerUp.Social.DataAccess.Entities.UserProfile", null)
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", null)
                         .WithMany()
                         .HasForeignKey("FriendsId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PartnerUp.Social.DataAccess.Entities.UserProfile", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", b =>
                 {
                     b.Navigation("MyRatings");
 

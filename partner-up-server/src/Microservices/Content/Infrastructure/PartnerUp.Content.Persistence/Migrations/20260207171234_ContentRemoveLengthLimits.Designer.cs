@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartnerUp.Content.Persistence;
 
@@ -11,9 +12,10 @@ using PartnerUp.Content.Persistence;
 namespace PartnerUp.Content.Persistence.Migrations
 {
     [DbContext(typeof(ContentDbContext))]
-    partial class ContentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260207171234_ContentRemoveLengthLimits")]
+    partial class ContentRemoveLengthLimits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

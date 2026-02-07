@@ -20,10 +20,10 @@ public class UserConfiguration : IEntityTypeConfiguration<UserProfile>
                .IsRequired();
 
         builder.Property(user => user.Profession)
-               .HasMaxLength(50);
+               .HasColumnType("nvarchar(max)");
 
         builder.Property(user => user.Specialization)
-               .HasMaxLength(50);
+               .HasColumnType("nvarchar(max)");
 
         new UserProfileSeeder().Seed(builder);
     }

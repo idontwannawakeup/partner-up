@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PartnerUp.Content.Persistence;
+using PartnerUp.Social.DataAccess;
 
 #nullable disable
 
-namespace PartnerUp.Content.Persistence.Migrations
+namespace PartnerUp.Social.DataAccess.Migrations
 {
-    [DbContext(typeof(ContentDbContext))]
-    partial class ContentDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SocialDbContext))]
+    [Migration("20260207171754_SocialRemoveLengthLimits")]
+    partial class SocialRemoveLengthLimits
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,97 +24,57 @@ namespace PartnerUp.Content.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.Notification", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.Rating", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Comment")
+                        .HasColumnType("ntext");
 
-                    b.Property<DateTime>("NotifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("NotifiedUserId")
+                    b.Property<Guid>("FromId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NotifiedUserId");
-
-                    b.ToTable("Notifications");
-                });
-
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.NotificationTemplate", b =>
-                {
-                    b.Property<int>("Id")
+                    b.Property<int>("Punctuality")
                         .HasColumnType("int");
 
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Responsibility")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Skills")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Social")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ToId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("NotificationTemplates");
+                    b.HasAlternateKey("FromId", "ToId")
+                        .HasName("AK_Ratings_FromId_ToId");
+
+                    b.HasIndex("ToId");
+
+                    b.ToTable("Ratings");
 
                     b.HasData(
                         new
                         {
-                            Id = 0,
-                            Message = "{FullName}, you were assigned to ticket: {TicketTitle}",
-                            Title = "New ticket"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Message = "{FullName}, deadline for assigned ticket is soon: {TicketTitle}, {TicketDeadline}",
-                            Title = "Deadline reminder"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Message = "{FullName}, you have new friend request!",
-                            Title = "New friend"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Message = "{FullName}, description of ticket changed: {TicketTitle}",
-                            Title = "Ticket description changed"
+                            Id = new Guid("05fa2b57-f3cb-4053-bd7a-d4a3669b596f"),
+                            Comment = "Just a great person",
+                            FromId = new Guid("3b333929-f974-444e-a8d3-68f50a0459c0"),
+                            Punctuality = 4,
+                            Responsibility = 5,
+                            Skills = 5,
+                            Social = 5,
+                            ToId = new Guid("61dfb9e3-1c27-424a-9963-9586ca110220")
                         });
                 });
 
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.RecentRequest", b =>
-                {
-                    b.Property<Guid>("UserProfileId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RequestedEntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("RecentRequestEntityType")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RequestedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserProfileId", "RequestedEntityId", "RecentRequestEntityType");
-
-                    b.ToTable("RecentRequests");
-                });
-
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.UserProfile", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -223,31 +185,64 @@ namespace PartnerUp.Content.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.Notification", b =>
+            modelBuilder.Entity("UserProfileUserProfile", b =>
                 {
-                    b.HasOne("PartnerUp.Content.Domain.Entities.UserProfile", "NotifiedUser")
-                        .WithMany("Notifications")
-                        .HasForeignKey("NotifiedUserId")
+                    b.Property<Guid>("FriendForUsersId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("SecondId");
+
+                    b.Property<Guid>("FriendsId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("FirstId");
+
+                    b.HasKey("FriendForUsersId", "FriendsId");
+
+                    b.HasIndex("FriendsId");
+
+                    b.ToTable("Friends", (string)null);
+                });
+
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.Rating", b =>
+                {
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", "From")
+                        .WithMany("MyRatings")
+                        .HasForeignKey("FromId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Ratings_FromId");
+
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", "To")
+                        .WithMany("RatingsFromMe")
+                        .HasForeignKey("ToId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_Ratings_ToId");
+
+                    b.Navigation("From");
+
+                    b.Navigation("To");
+                });
+
+            modelBuilder.Entity("UserProfileUserProfile", b =>
+                {
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", null)
+                        .WithMany()
+                        .HasForeignKey("FriendForUsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("NotifiedUser");
-                });
-
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.RecentRequest", b =>
-                {
-                    b.HasOne("PartnerUp.Content.Domain.Entities.UserProfile", null)
-                        .WithMany("RecentRequests")
-                        .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", null)
+                        .WithMany()
+                        .HasForeignKey("FriendsId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PartnerUp.Content.Domain.Entities.UserProfile", b =>
+            modelBuilder.Entity("PartnerUp.Social.DataAccess.Data.Entities.UserProfile", b =>
                 {
-                    b.Navigation("Notifications");
+                    b.Navigation("MyRatings");
 
-                    b.Navigation("RecentRequests");
+                    b.Navigation("RatingsFromMe");
                 });
 #pragma warning restore 612, 618
         }
