@@ -101,8 +101,7 @@
                                         <MudMenu Class="ml-auto"
                                                  Icon="@Icons.Material.Filled.MoreHoriz"
                                                  Dense="@true"
-                                                 OffsetX="true"
-                                                 Direction="@Direction.Left">
+                                                 AnchorOrigin="Origin.BottomLeft">
                                             <MudMenuItem OnClick="@(async _ => await DeleteMemberAsync(member))">
                                                 @SharedLocalizer["Remove"]
                                             </MudMenuItem>
