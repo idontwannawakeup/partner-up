@@ -44,7 +44,7 @@
                         <span>@SharedLocalizer["Settings"]</span>
                     </MudNavLink>
                     <MudDivider Class="my-2" />
-                    <MudNavLink OnClick="@SignOutAsync" Icon="@Icons.Filled.ExitToApp">@SharedLocalizer["Exit"]</MudNavLink>
+                    <MudNavLink Href="/signout" Icon="@Icons.Filled.ExitToApp">@SharedLocalizer["Exit"]</MudNavLink>
 
                 </MudNavMenu>
             </MudPopover>
@@ -122,11 +122,5 @@
 
     private void ToggleAvatarMenu() =>
         _avatarMenuOpen = !_avatarMenuOpen;
-
-    private async Task SignOutAsync()
-    {
-        await StateProvider.MarkUserAsLoggedOutAsync();
-        NavigationManager.NavigateTo("/");
-    }
 
 }
