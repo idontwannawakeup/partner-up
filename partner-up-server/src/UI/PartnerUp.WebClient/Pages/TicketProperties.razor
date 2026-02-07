@@ -138,13 +138,6 @@ else
             members = members.Where(m => m.LastName.Contains(lastName));
         }
 
-        // members = await UsersService.GetAsync(new UsersParameters()
-        // {
-        //     TeamId = _ticket.Project.Team.Id,
-        //     LastName = lastName,
-        //     PageSize = 50
-        // });
-
         return members;
     }
 

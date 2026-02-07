@@ -21,29 +21,17 @@ public class ApiAuthenticationStateProvider : AuthenticationStateProvider
 
     public override Task<AuthenticationState> GetAuthenticationStateAsync()
     {
-        // var encryptedToken = await _localStorage.GetItemAsync<string>("securityToken");
-        // if (encryptedToken is null)
-        // {
-        //     return AnonymousState;
-        // }
-        //
-        // var token = new JwtSecurityTokenHandler().ReadJwtToken(encryptedToken);
-        // return GenerateStateFromToken(token);
         return Task.FromResult<AuthenticationState>(default);
     }
 
-    public async Task MarkUserAsAuthenticatedAsync(string encryptedToken)
+    public Task MarkUserAsAuthenticatedAsync(string encryptedToken)
     {
-        // await _localStorage.SetItemAsync("securityToken", encryptedToken);
-        // var token = new JwtSecurityTokenHandler().ReadJwtToken(encryptedToken);
-        // var state = GenerateStateFromToken(token);
-        // NotifyAuthenticationStateChanged(Task.FromResult(state));
+        return Task.CompletedTask;
     }
 
-    public async Task MarkUserAsLoggedOutAsync()
+    public Task MarkUserAsLoggedOutAsync()
     {
-        // await _localStorage.RemoveItemAsync("securityToken");
-        // NotifyAuthenticationStateChanged(Task.FromResult(AnonymousState));
+        return Task.CompletedTask;
     }
 
     public static async Task<Guid> GetUserIdFromStateAsync(Task<AuthenticationState> state)
