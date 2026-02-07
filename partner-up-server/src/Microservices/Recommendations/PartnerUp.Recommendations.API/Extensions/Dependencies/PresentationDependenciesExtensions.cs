@@ -1,5 +1,7 @@
 using Microsoft.Azure.CognitiveServices.Personalizer;
+using PartnerUp.Recommendations.API.Clients;
 using PartnerUp.Recommendations.API.Common;
+using PartnerUp.Recommendations.API.Services;
 
 namespace PartnerUp.Recommendations.API.Extensions.Dependencies;
 
@@ -27,6 +29,9 @@ public static class PresentationDependenciesExtensions
         {
             httpClient.BaseAddress = new($"{configuration["IdentityPeopleServiceUrl"]}/");
         });
+
+        services.AddScoped<IPersonalizerRecommendationsClient, RecommendationsClient>();
+        services.AddScoped<IRecommendationsService, PersonalizerRecommendationsService>(); 
 
         return services;
     }

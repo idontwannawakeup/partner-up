@@ -16,6 +16,8 @@ public static class IdentityServerConfiguration
         new ApiScope("social-api.read"),
         new ApiScope("social-api.write"),
         new ApiScope("content-api.read"),
+        new ApiScope("recommendations-api.read"),
+        new ApiScope("recommendations-api.write"),
     };
 
     public static IEnumerable<IdentityResource> IdentityResources => new List<IdentityResource>

@@ -56,6 +56,8 @@ public class Startup
                     options.Scope.Add("social-api.read");
                     options.Scope.Add("social-api.write");
                     options.Scope.Add("content-api.read");
+                    options.Scope.Add("recommendations-api.read");
+                    options.Scope.Add("recommendations-api.write");
 
                     options.ResponseType = "code";
                     options.SaveTokens = true;
@@ -85,6 +87,7 @@ public class Startup
         var identityUrl = $"{apiUrl}/{Configuration["Intermediate:IdentityService"]}";
         var coreUrl = $"{apiUrl}/{Configuration["Intermediate:CoreService"]}";
         var socialUrl = $"{apiUrl}/{Configuration["Intermediate:SocialService"]}";
+        var recommendationsUrl = $"{apiUrl}/{Configuration["Intermediate:RecommendationsService"]}";
 
         services.AddHttpClient<IIdentityService, IdentityService>(httpClient =>
         {
@@ -119,6 +122,11 @@ public class Startup
         services.AddHttpClient<IUsersService, UsersService>(httpClient =>
         {
             httpClient.BaseAddress = new($"{identityUrl}/Users/");
+        });
+        
+        services.AddHttpClient<IRecommendationsService, RecommendationsService>(httpClient =>
+        {
+            httpClient.BaseAddress = new($"{recommendationsUrl}/Recommendations/");
         });
 
         services.AddLocalization(options => options.ResourcesPath = "Localization");

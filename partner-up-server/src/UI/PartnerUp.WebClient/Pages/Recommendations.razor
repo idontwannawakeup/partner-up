@@ -1,12 +1,6 @@
 @page "/recommendations/{TeamId:guid}"
 @inject IStringLocalizer<SharedLocalization> SharedLocalizer
-@inject NavigationManager NavigationManager
 @inject IConfiguration Configuration
-@inject IDialogService DialogService
-@inject ISnackbar Snackbar
-@inject IFriendsService FriendsService
-@inject IUsersService UsersService
-@inject RequestErrorsHandler RequestErrorsHandler
 
 <MudTable Class="mt-md-12 mb-12"
           T="@UserViewModel"
@@ -93,7 +87,7 @@
                             <MudText Typo="@Typo.h6">
                                 Leave a rate about this recommendation
                             </MudText>
-                            <MudRating />
+                            <MudRating SelectedValueChanged="@RankRecommendationAsync" />
                             <MudDivider Class="mt-2 mb-4" />
                         </MudElement>
                         <MudButton Link="@LinkToSelectedRecommendedUserProfile"
@@ -120,17 +114,19 @@
 
     [Parameter] public Guid TeamId { get; set; }
     [CascadingParameter] private Task<AuthenticationState> State { get; set; }
+    
+    [Inject] public IRecommendationsService RecommendationsService { get; set; }
 
     private MudTable<UserViewModel> _table;
-    private Guid _authenticatedUserId;
     private UserViewModel _user;
+    private Guid _recommendationId;
 
     private string LinkToSelectedRecommendedUserProfile => $"/users/{_user.Id}/profile";
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        _authenticatedUserId = await ApiAuthenticationStateProvider.GetUserIdFromStateAsync(State);
+        await ApiAuthenticationStateProvider.GetUserIdFromStateAsync(State);
     }
 
     private void SelectRecommendedUser(TableRowClickEventArgs<UserViewModel> args)
@@ -140,17 +136,16 @@
 
     private async Task<TableData<UserViewModel>> InitializeRecommendedTeammatesAsync(TableState state)
     {
-        _authenticatedUserId = await ApiAuthenticationStateProvider.GetUserIdFromStateAsync(State);
-        var (users, pagination) = await UsersService.GetWithPaginationHeaderAsync(new UsersParameters
-        {
-            PageNumber = state.Page + 1,
-            PageSize = state.PageSize + 1,
-        });
-
-        users = users.Where(u => u.Profession == "Software Engineer" || u.Profession == "Developer").ToList();
-        pagination.TotalEntitiesCount = users.Count();
-
-        return new() { Items = users, TotalItems = pagination.TotalEntitiesCount };
+        await ApiAuthenticationStateProvider.GetUserIdFromStateAsync(State);
+        var recommendation = await RecommendationsService.RecommendAsync(TeamId);
+        _recommendationId = Guid.Parse(recommendation.EventId);
+        var recommendedUsers = recommendation.Candidates;
+        var userViewModels = recommendedUsers as UserViewModel[] ?? recommendedUsers.ToArray();
+        return new() { Items = userViewModels, TotalItems = userViewModels.Length };
     }
 
+    private async Task RankRecommendationAsync(int score)
+    {
+        await RecommendationsService.RankAsync(_recommendationId, score);
+    }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PartnerUp.Recommendations.API.Services;
 
 namespace PartnerUp.Recommendations.API.Controllers;
 
@@ -6,26 +7,26 @@ namespace PartnerUp.Recommendations.API.Controllers;
 [Route("api/[controller]")]
 public class RecommendationsController : ControllerBase
 {
+    private readonly IRecommendationsService _recommendationsService;
+
+    public RecommendationsController(IRecommendationsService recommendationsService)
+    {
+        _recommendationsService = recommendationsService;
+    }
+
     [HttpGet("{teamId:Guid}")]
     public async Task<IActionResult> Get(Guid teamId)
     {
-        return Ok("Recommendations");
+        var token = HttpContext.Request.Headers.Authorization;
+        var recommendedUsers = await _recommendationsService.GetAsync(teamId, token);
+        return Ok(recommendedUsers);
     }
-}
 
-public class TeamContext
-{
-    [NonSerialized]
-    public Guid Id;
-    public string Specialization { get; set; } = default!;
-    public string About { get; set; } = default!;
-    public List<UserProfile> Members { get; set; }
-}
-
-public class UserProfile
-{
-    [NonSerialized]
-    public Guid Id;
-    public string Profession { get; set; } = default!;
-    public string Specialization { get; set; } = default!;
+    [HttpPost("{eventId:Guid}/{score:int}")]
+    public async Task<IActionResult> RankAsync(Guid eventId, int score)
+    {
+        var token = HttpContext.Request.Headers.Authorization;
+        await _recommendationsService.RankAsync(eventId.ToString("B"), score);
+        return Ok();
+    }
 }

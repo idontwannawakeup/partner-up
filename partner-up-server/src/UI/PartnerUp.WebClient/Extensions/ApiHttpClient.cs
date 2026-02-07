@@ -96,7 +96,7 @@ public class ApiHttpClient
     }
 
     private async Task<AuthenticationHeaderValue> GenerateAuthorizationHeaderAsync() =>
-        new("bearer", await _stateProvider.GetJwtTokenAsync());
+        new("Bearer", await _stateProvider.GetJwtTokenAsync());
 
     public ApiHttpClient(HttpClient httpClient, ApiAuthenticationStateProvider stateProvider)
     {

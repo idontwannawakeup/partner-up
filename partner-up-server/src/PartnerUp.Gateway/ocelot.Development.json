@@ -52,6 +52,24 @@
         "Delete"
       ]
     },
+    
+    {
+      "DownstreamPathTemplate": "/api/{all}",
+      "UpstreamPathTemplate": "/RecommendationsService/gateway/{all}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7208
+        }
+      ],
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ]
+    },
 
     {
       "DownstreamPathTemplate": "/api/Recent/{all}",
