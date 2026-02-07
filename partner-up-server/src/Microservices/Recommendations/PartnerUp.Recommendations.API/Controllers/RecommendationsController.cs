@@ -25,7 +25,6 @@ public class RecommendationsController : ControllerBase
     [HttpPost("{eventId:Guid}/{score:int}")]
     public async Task<IActionResult> RankAsync(Guid eventId, int score)
     {
-        var token = HttpContext.Request.Headers.Authorization;
         await _recommendationsService.RankAsync(eventId.ToString("B"), score);
         return Ok();
     }
