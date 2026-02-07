@@ -1,4 +1,6 @@
-﻿namespace PartnerUp.Identity.People.BusinessLogic.Common.Models.Requests;
+﻿using System;
+
+namespace PartnerUp.Identity.People.BusinessLogic.Common.Models.Requests;
 
 public class UserRequest
 {

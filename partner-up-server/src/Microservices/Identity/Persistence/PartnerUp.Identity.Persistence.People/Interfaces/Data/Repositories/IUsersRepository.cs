@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using PartnerUp.Identity.Persistence.People.Common.Parameters;
 using PartnerUp.Identity.Persistence.People.Data.Entities;
 using PartnerUp.Shared.Pagination;

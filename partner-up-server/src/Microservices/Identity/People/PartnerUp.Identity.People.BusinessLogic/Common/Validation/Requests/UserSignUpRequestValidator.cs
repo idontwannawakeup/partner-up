@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Linq;
+using FluentValidation;
 using PartnerUp.Identity.People.BusinessLogic.Common.Models.Requests;
 
 namespace PartnerUp.Identity.People.BusinessLogic.Common.Validation.Requests;

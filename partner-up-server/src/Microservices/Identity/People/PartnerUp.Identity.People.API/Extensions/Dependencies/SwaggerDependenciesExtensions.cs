@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
 namespace PartnerUp.Identity.People.API.Extensions.Dependencies;

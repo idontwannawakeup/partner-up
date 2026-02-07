@@ -1,4 +1,6 @@
-﻿namespace PartnerUp.Identity.People.BusinessLogic.Common.Models.Responses;
+﻿using System;
+
+namespace PartnerUp.Identity.People.BusinessLogic.Common.Models.Responses;
 
 public class UserResponse
 {

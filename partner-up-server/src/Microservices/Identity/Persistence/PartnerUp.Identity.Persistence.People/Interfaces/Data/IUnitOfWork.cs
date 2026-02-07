@@ -1,4 +1,5 @@
-﻿using PartnerUp.Identity.Persistence.People.Interfaces.Data.Repositories;
+﻿using System.Threading.Tasks;
+using PartnerUp.Identity.Persistence.People.Interfaces.Data.Repositories;
 
 namespace PartnerUp.Identity.Persistence.People.Interfaces.Data;
 

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using PartnerUp.Identity.People.API.Extensions.Dependencies;
 using PartnerUp.Identity.People.API.Middlewares;
 using PartnerUp.Identity.People.BusinessLogic.Extensions.Dependencies;

@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using PartnerUp.Shared.Exceptions;
 
 namespace PartnerUp.Identity.People.API.Middlewares;
