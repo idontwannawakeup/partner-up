@@ -56,8 +56,8 @@
         <MudTd>
             <MudElement HtmlTag="div" Class="d-flex">
                 <MudMenu Icon="@Icons.Material.Filled.MoreHoriz"
-                         Class="ml-auto" OffsetX="@true"
-                         Direction="@Direction.Left">
+                         Class="ml-auto"
+                         AnchorOrigin="Origin.BottomLeft">
                     <MudMenuItem OnClick="@(async _ => await DeleteFriendAsync(context.Id))">
                         @SharedLocalizer["Delete"]
                     </MudMenuItem>
